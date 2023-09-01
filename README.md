@@ -1,93 +1,72 @@
-# :package_description
+# LaraMediaMover
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
-
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+LaraMediaMover is a Laravel package that simplifies the process of moving media files to a specified storage disk using Laravel's Storage system.
 
 ## Installation
 
-You can install the package via composer:
+You can install this package via Composer by running the following command:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require zakariayacine/laramediamover
 ```
+The package will automatically register itself.
 
-You can publish and run the migrations with:
+Next, you should publish the package configuration file using the following command:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
+php artisan vendor:publish --tag=laramediamover-config
+```
+This will create a laramediamover.php configuration file in your config directory. You can customize the configuration according to your needs.
+
+Usage
+To use LaraMediaMover, you need to create an instance of the LaraMediaMover class and call the moveFile method. Here's an example of how to use it:
+
+ ```php
+ use Zakariayacine\LaraMediaMover\LaraMediaMover;
+
+// Instantiate LaraMediaMover with the file content, extension, and optional parameters
+$mediaMover = new LaraMediaMover($fileContent, 'jpg', 'my_image.jpg', 'public');
+
+// Move the file and get its URL
+$mediaUrl = $mediaMover->moveFile();
+
+if ($mediaUrl) {
+    // The file has been successfully moved, and $mediaUrl contains its URL
+    // You can use $mediaUrl as needed in your application
+} else {
+    // An error occurred during the file move process
+    // Handle the error appropriately
+}
 ```
 
-You can publish the config file with:
+In the above example:
 
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
-```
+$fileContent is the content of the media file you want to move.
+'jpg' is the file extension.
+'my_image.jpg' is the desired file name.
+'public' is the storage disk you want to use.
+You can customize these parameters according to your requirements.
 
-This is the contents of the published config file:
+Configuration
+You can customize the package's behavior by modifying the laramediamover.php configuration file located in your config directory. This file allows you to define default settings for the package.
+
+Exceptions
+The package may throw a MediaMoveException in case of an error during the media move process. You can catch this exception to handle errors gracefully.
 
 ```php
-return [
-];
+use Zakariayacine\LaraMediaMover\Exceptions\MediaMoveException;
+
+try {
+    // Attempt to move the media file here
+} catch (MediaMoveException $e) {
+    // Handle the error, log it, or return an error response
+}
 ```
 
-Optionally, you can publish the views using
+License
+This package is open-sourced software licensed under the MIT license.
 
-```bash
-php artisan vendor:publish --tag=":package_slug-views"
+```css
+Please note that you should customize this README to include any specific instructions or details related to your package. Additionally, make sure to replace the placeholder content with actual package details, usage instructions, and license information.
 ```
 
-## Usage
-
-```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
-```
-
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Credits
-
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

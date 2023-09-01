@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Zakariayacine\LaraMediaMover\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaraMediaMoverCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laramediamover';
 
     public $description = 'My command';
 
