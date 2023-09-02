@@ -62,6 +62,6 @@ class LaraMediaMover
 
         // Combine the extension and filename and get the storage folder path
         return PathExtensionMatcher::getFolderPathByExtension($this->extension) .
-            FileNameGenerator::nameHasher($fileName, $this->extension);
+            FileNameGenerator::nameHasher($fileName);
     }
 }

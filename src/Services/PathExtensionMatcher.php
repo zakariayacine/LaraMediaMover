@@ -7,14 +7,14 @@ class PathExtensionMatcher
     /*
      * Constants representing major existing paths.
      */
-    private const P_PDF = 'PDF/';
-    private const P_DOC = 'DOCUMENTS/';
-    private const P_IMAGE = 'IMAGES/';
-    private const P_VIDEO = 'VIDEOS/';
-    private const P_AUDIO = 'AUDIO/';
-    private const P_ARCHIVE = 'ARCHIVES/';
-    private const P_SPREADSHEET = 'SPREADSHEETS/';
-    private const P_PRESENTATION = 'PRESENTATIONS/';
+    private const P_PDF = 'public/PDF/';
+    private const P_DOC = 'public/DOCUMENTS/';
+    private const P_IMAGE = 'public/IMAGES/';
+    private const P_VIDEO = 'public/VIDEOS/';
+    private const P_AUDIO = 'public/AUDIO/';
+    private const P_ARCHIVE = 'public/ARCHIVES/';
+    private const P_SPREADSHEET = 'public/SPREADSHEETS/';
+    private const P_PRESENTATION = 'public/PRESENTATIONS/';
 
     /*
      * Static array mapping file extensions to major existing paths.
@@ -64,7 +64,7 @@ class PathExtensionMatcher
         if (array_key_exists($extension, self::$fileTypeMapping)) {
             return self::$fileTypeMapping[$extension] . $extension . '/';
         } else {
-            return 'OTHER/'; // If the extension is not listed, return 'OTHER' by default or another appropriate value.
+            return 'public/OTHER/'; // If the extension is not listed, return 'OTHER' by default or another appropriate value.
         }
     }
 

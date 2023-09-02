@@ -12,9 +12,9 @@ class FileNameGenerator
      * @return string The corresponding folder or 'OTHER' if not found.
      */
     
-    public static function nameHasher($fileName , $extension)
+    public static function nameHasher($fileName)
     {
-        return hash('ripemd160', $fileName).time().$extension;
+        return hash('ripemd160', $fileName).time();
     }
 
 }
