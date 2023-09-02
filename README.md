@@ -1,5 +1,5 @@
 # LaraMediaMover
-<img src="URL_de_votre_image" alt="Texte alternatif de l'image" style="width: 100%;">
+<img src="https://i.ibb.co/YWYZt1w/lara-Media-Mover.png" alt="lara-Media-Mover-logo" style="width: 100%;">
 LaraMediaMover is a versatile Laravel package that simplifies the movement and management of multimedia files of all types, including images, videos, and documents. It provides a comprehensive solution for uploading, storage, renaming, and handling files, ensuring a seamless development experience for Laravel projects.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/zakariayacine/laramediamover/blob/main/LICENSE)
