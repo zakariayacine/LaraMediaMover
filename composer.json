@@ -31,6 +31,8 @@
     "autoload": {
         "psr-4": {
             "Zakariayacine\\LaraMediaMover\\": "src/",
+            "Zakariayacine\\LaraMediaMover\\Services\\": "src/Services/",
+            "Zakariayacine\\LaraMediaMover\\Exceptions\\": "src/Exceptions/",
             "Zakariayacine\\LaraMediaMover\\Database\\Factories\\": "database/factories/"
         }
     },

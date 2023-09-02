@@ -21,12 +21,12 @@ class LaraMediaMover
     public function __construct(
         public $file,
         public string $extension,
-        public string $fileName = null,
-        public string $disk = null
+        public $fileName = null,
+        public $disk = null,
     ) {
         // Utilisez Config::get pour obtenir les valeurs de configuration par défaut
-        $this->fileName = $fileName ?? Config::get('laramediamover.defaultFileName', 'no_name_provided');
-        $this->disk = $disk ?? Config::get('laramediamover.defaultDisk', 'local');
+        $this->fileName = $fileName ?? Config::get('laramediamover.defaultFileName');
+        $this->disk = $disk ?? Config::get('laramediamover.defaultDisk');
     }
 
     /**
@@ -58,7 +58,7 @@ class LaraMediaMover
      */
     private function pathConstructor(): string
     {
-        $fileName = $this->file['name'] ?? $this->fileName;
+        $fileName = $this->file->getClientOriginalName() ?? $this->fileName;
 
         // Combine the extension and filename and get the storage folder path
         return PathExtensionMatcher::getFolderPathByExtension($this->extension) .
