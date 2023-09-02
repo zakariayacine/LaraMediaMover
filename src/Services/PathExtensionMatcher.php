@@ -54,7 +54,6 @@ class PathExtensionMatcher
      * @param string $extension The file extension.
      * @return string The corresponding folder or 'OTHER' if not found.
      */
-    
     public static function getFolderPathByExtension($extension)
     {
         // Convert the extension to lowercase to avoid case sensitivity issues
@@ -62,10 +61,11 @@ class PathExtensionMatcher
 
         // Check if the extension exists in the mapping array
         if (array_key_exists($extension, self::$fileTypeMapping)) {
-            return self::$fileTypeMapping[$extension] . $extension . '/';
+            // Construct the folder path by appending the extension
+            return self::$fileTypeMapping[$extension] . $extension;
         } else {
-            return 'public/OTHER/'; // If the extension is not listed, return 'OTHER' by default or another appropriate value.
+            // If the extension is not listed, return 'public/OTHER' by default or another appropriate value.
+            return 'public/OTHER';
         }
     }
-
 }

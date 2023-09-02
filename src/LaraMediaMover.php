@@ -24,7 +24,7 @@ class LaraMediaMover
         public $fileName = null,
         public $disk = null,
     ) {
-        // Utilisez Config::get pour obtenir les valeurs de configuration par défaut
+        // Use Config::get to retrieve default configuration values
         $this->fileName = $fileName ?? Config::get('laramediamover.defaultFileName');
         $this->disk = $disk ?? Config::get('laramediamover.defaultDisk');
     }
@@ -37,31 +37,23 @@ class LaraMediaMover
     public function moveFile(): ?string
     {
         try {
-            $path = $this->pathConstructor();
-
+            // Get the folder path based on the file extension
+            $path = PathExtensionMatcher::getFolderPathByExtension($this->extension);
+            
+            // Use the original file name or the provided file name
+            $fileName = $this->file->getClientOriginalName() ?? $this->fileName;
+            
             // Use Laravel's Storage facade to put the file on the specified disk
-            $value = Storage::disk($this->disk)->put($path, $this->file, [
-                'visibility' => 'public',
-            ]);
-
+            $value = Storage::disk($this->disk)->putFileAs(
+                $path, 
+                $this->file,
+                FileNameGenerator::nameHasher($fileName) . '.' . $this->extension,
+            );
+            
             // Return the URL of the moved file
             return Storage::disk($this->disk)->url($value);
         } catch (\Throwable $th) {
             throw new MediaMoveException("Failed to move the media file: " . $th->getMessage());
         }
-    }
-
-    /**
-     * Construct the storage path for the file based on its extension and filename.
-     *
-     * @return string The constructed storage path.
-     */
-    private function pathConstructor(): string
-    {
-        $fileName = $this->file->getClientOriginalName() ?? $this->fileName;
-
-        // Combine the extension and filename and get the storage folder path
-        return PathExtensionMatcher::getFolderPathByExtension($this->extension) .
-            FileNameGenerator::nameHasher($fileName);
     }
 }
